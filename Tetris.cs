@@ -1040,7 +1040,7 @@ namespace Main
 				{
 					Console.ForegroundColor = ConsoleColor.White;
 					Console.SetCursorPosition((Console.WindowWidth-17)/2, Console.WindowHeight / 2-6);
-					Console.Write("+----------------+");
+					Console.Write("+-----Tetris-----+");
 
 					for(int i=1; i<=12; i++)
 					{
