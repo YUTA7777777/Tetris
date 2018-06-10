@@ -1030,14 +1030,15 @@ namespace Main
 			int selected=1;
 			int isEnter=0;
 			string msg1="Start the Game";
-			string msg2="More difficult";
-			string msg3="Easier";
+			string msg2="Level up!!";
+			string msg3="Level down!!";
 			string msg4="Quit";
 			Console.CursorVisible = false;
 			while (!end)
 			{
 				while(isEnter==0)
 				{
+					Console.CursorVisible = false;
 					Console.ForegroundColor = ConsoleColor.White;
 					Console.SetCursorPosition((Console.WindowWidth-17)/2, Console.WindowHeight / 2-6);
 					Console.Write("+----------------+");
@@ -1051,6 +1052,7 @@ namespace Main
 					Console.SetCursorPosition((Console.WindowWidth-17)/2, Console.WindowHeight / 2+6);
 					Console.Write("+----------------+");
 					Console.ResetColor();
+
 					Console.SetCursorPosition((Console.WindowWidth -msg1.Length) / 2,Console.WindowHeight / 2-4);
 					if(selected==1)
 						Console.ForegroundColor = ConsoleColor.Blue;
