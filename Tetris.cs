@@ -1030,8 +1030,8 @@ namespace Main
 			int selected=1;
 			int isEnter=0;
 			string msg1="Start the Game";
-			string msg2="Increase LEVEL";
-			string msg3="Decrease LEVEL";
+			string msg2="More difficult";
+			string msg3="Easier";
 			string msg4="Quit";
 			Console.CursorVisible = false;
 			while (!end)
@@ -1040,7 +1040,7 @@ namespace Main
 				{
 					Console.ForegroundColor = ConsoleColor.White;
 					Console.SetCursorPosition((Console.WindowWidth-17)/2, Console.WindowHeight / 2-6);
-					Console.Write("+-----Tetris-----+");
+					Console.Write("+----------------+");
 
 					for(int i=1; i<=12; i++)
 					{
