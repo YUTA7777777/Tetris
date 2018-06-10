@@ -44,9 +44,9 @@ namespace Tetris
 		const string msg2 = " Press Key to start..";
 		const string msg3 = "Pause";
 
-		static int Speed = 2; // Speed of the game.
-		static int Score = 0; // Total score.
-		static int Lines = 0; // Total lines completed.
+		public static int Speed = 4; // Speed of the game.
+		public static int Score = 0; // Total score.
+		public static int Lines = 0; // Total lines completed.
 
 		static Point ptBlock         = new Point();      // The x and y positions of the block.
 		static WindowRect wrBlockAdj = new WindowRect(); // Block adjustment.
@@ -267,16 +267,16 @@ namespace Tetris
 			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+4, 8);
 			Console.Write("Next");
 			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+2, 9);
-			Console.Write("########");
+			Console.Write("+------+");
 
 			for(int i=1; i<=6; i++)
 			{
 				Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+2, i+9);
-				Console.Write("#      #");
+				Console.Write("|      |");
 			}
 
 			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+2, 15);
-			Console.Write("########");
+			Console.Write("+------+");
 			Console.ResetColor();
 
 			Tetris.Block.Preview(new Point(PlayWindow.width+PlayWindow.left+6, 12), nextBlock);
@@ -321,8 +321,8 @@ namespace Tetris
 
 		private static void GameDesign()
 		{
-			const string dsgnTB = "################";
-			const string dsgnLR = "#              #";
+			const string dsgnTB = "+--------------+";
+			const string dsgnLR = "|              |";
 
 			// Define window size.
 			PlayWindow.left   = 33;
@@ -1015,7 +1015,7 @@ namespace Main
 {
 	public class MainClass
 	{
-		
+
 		public static Tetris.TetrisClass gameMain;
 		static void Main(string[] args)
 		{
@@ -1025,8 +1025,9 @@ namespace Main
 			while (!end)
 			{
 				gameMain.Run();
-			Console.SetCursorPosition((Console.WindowWidth -46) / 2,2);
-				Console.Write("If you want to quit this game ,please press ESC.");
+				string msg1="If you want to quit this game ,please press ESC.";
+				Console.SetCursorPosition((Console.WindowWidth -msg1.Length) / 2,Console.WindowHeight / 2);
+				Console.Write(msg1);
 				ConsoleKeyInfo key = Console.ReadKey(true); 
 				switch(key.Key)
 				{
@@ -1035,10 +1036,13 @@ namespace Main
 						break;
 					default:
 						Tetris.TetrisClass.isGameExit=false;
+						Tetris.TetrisClass.Score=0;
+						Tetris.TetrisClass.Lines=0;
 						break;
 				}
 				Console.Clear();
 			}
+			Console.CursorVisible = true;
 		}
 	}
 }
