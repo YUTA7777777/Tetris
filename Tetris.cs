@@ -44,7 +44,7 @@ namespace Tetris
 		const string msg2 = " Press Key to start..";
 		const string msg3 = "Pause";
 
-		public static int Speed = 4; // Speed of the game.
+		public static int Speed = 1; // Speed of the game.
 		public static int Score = 0; // Total score.
 		public static int Lines = 0; // Total lines completed.
 
@@ -95,10 +95,11 @@ namespace Tetris
 						case ConsoleKey.P:
 						case ConsoleKey.Enter: // pause, resume
 							// PRESS ANY KEY TO CONTINUE.
-							Console.ForegroundColor = ConsoleColor.White;
+							Console.ForegroundColor = ConsoleColor.Cyan;
 							Console.SetCursorPosition((Console.WindowWidth - msg3.Length) / 2,
 									PlayWindow.height+PlayWindow.top+2);
 							Console.Write(msg3);
+							Console.ForegroundColor = ConsoleColor.White;
 							Console.ResetColor();
 							Console.ReadKey();
 							// clear the message from the bottom window.
@@ -212,21 +213,21 @@ namespace Tetris
 				Lines += e.RowsCompleted;
 
 				// Increase the speed according to the number of lines completed.
-				if((Lines>=11) && (Lines<=20))
+				if((Score>=10) && (Score<=25))
 					Speed = 2;
-				else if((Lines>=21) && (Lines<=30))
+				else if((Lines>=25) && (Score<=50))
 					Speed = 3;
-				else if((Lines>=31) && (Lines<=40))
+				else if((Score>=50) && (Score<=75))
 					Speed = 4;
-				else if((Lines>=41) && (Lines<=50))
+				else if((Score>=75) && (Score<=100))
 					Speed = 5;
-				else if((Lines>=51) && (Lines<=60))
+				else if((Score>=100) && (Score<=150))
 					Speed = 6;
-				else if((Lines>=61) && (Lines<=70))
+				else if((Score>=150) && (Score<=250))
 					Speed = 7;
-				else if((Lines>=71) && (Lines<=80))
+				else if((Score>=250) && (Score<=500))
 					Speed = 8;
-				else if((Lines>=81) && (Lines<=90))
+				else if(Score>=500)
 					Speed = 9;
 
 				ShowStatus();   
@@ -245,8 +246,12 @@ namespace Tetris
 			Console.Write(String.Format("{0:D8}", Score));
 			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+2, 6);
 			Console.Write(String.Format("{0:D8}", Lines));
+			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+3, 17);
+			Console.Write("Pause : Enter or P");
+			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+3, 20);
+			Console.Write("Quit  : ESC or Q");
 
-			if(Lines>=100)
+			if(Score>=500)
 			{
 				// CONGRATULATIONS!!!
 				Console.ForegroundColor = ConsoleColor.White;
@@ -1022,42 +1027,92 @@ namespace Main
 			Console.Clear();
 			gameMain = new 	Tetris.TetrisClass();
 			bool end=false;
-			int selected=0;
-			string msg1="Quit";
-			string msg2="Change LEVEL";
+			int selected=1;
+			int isEnter=0;
+			string msg1="Start the Game";
+			string msg2="Increase LEVEL";
+			string msg3="Decrease LEVEL";
+			string msg4="Quit";
+			Console.CursorVisible = false;
 			while (!end)
 			{
-				gameMain.Run();
-				while(!end)
+				while(isEnter==0)
 				{
-					Console.SetCursorPosition((Console.WindowWidth -msg1.Length) / 2,Console.WindowHeight / 2-1);
+					Console.ForegroundColor = ConsoleColor.White;
+					Console.SetCursorPosition((Console.WindowWidth-17)/2, Console.WindowHeight / 2-6);
+					Console.Write("+----------------+");
+
+					for(int i=1; i<=12; i++)
+					{
+						Console.SetCursorPosition((Console.WindowWidth-17)/2, Console.WindowHeight / 2+i-6);
+					Console.Write("|                |");
+					}
+
+					Console.SetCursorPosition((Console.WindowWidth-17)/2, Console.WindowHeight / 2+6);
+					Console.Write("+----------------+");
+					Console.ResetColor();
+					Console.SetCursorPosition((Console.WindowWidth -msg1.Length) / 2,Console.WindowHeight / 2-4);
+					if(selected==1)
+						Console.ForegroundColor = ConsoleColor.Blue;
 					Console.Write(msg1);
-					Console.SetCursorPosition((Console.WindowWidth -msg2.Length) / 2,(Console.WindowHeight / 2 +1));
+					Console.ForegroundColor = ConsoleColor.White;
+					Console.SetCursorPosition((Console.WindowWidth -msg2.Length) / 2,(Console.WindowHeight / 2 -2));
+					if(selected==2)
+						Console.ForegroundColor = ConsoleColor.Blue;
 					Console.Write(msg2);
+					Console.ForegroundColor = ConsoleColor.White;
+					Console.SetCursorPosition((Console.WindowWidth -msg3.Length) / 2,(Console.WindowHeight / 2  ));
+					if(selected==3)
+						Console.ForegroundColor = ConsoleColor.Blue;
+					Console.Write(msg3);
+					Console.ForegroundColor = ConsoleColor.White;
+					Console.SetCursorPosition((Console.WindowWidth -msg4.Length) / 2,(Console.WindowHeight / 2 +2));
+					if(selected==4)
+						Console.ForegroundColor = ConsoleColor.Blue;
+					Console.Write(msg4);
+					Console.ForegroundColor = ConsoleColor.White;
+					Console.SetCursorPosition((Console.WindowWidth) / 2 -4,(Console.WindowHeight / 2 +4));
+					Console.Write("LEVEL       ");
+					Console.SetCursorPosition((Console.WindowWidth) / 2 +3,(Console.WindowHeight / 2 +4));
+					Console.Write(Tetris.TetrisClass.Speed);
 					ConsoleKeyInfo key = Console.ReadKey(true); 
 					switch(key.Key)
 					{
 						case ConsoleKey.Enter:
-							if(selected==1)
-								end=true;
-							if(selected==2)
-								Tetris.TetrisClass.Speed++;
-							if(selected==3){
+							if(selected==1){
 								Tetris.TetrisClass.isGameExit=false;
 								Tetris.TetrisClass.Score=0;
 								Tetris.TetrisClass.Lines=0;
+								isEnter=1;
+								Console.Clear();
+								gameMain.Run();
 							}
-						case ConsoleKey.Escape:
-							end=true;
+							if(selected==2){
+								if(Tetris.TetrisClass.Speed!=10)
+									Tetris.TetrisClass.Speed++;
+							}
+							if(selected==3){
+								if(Tetris.TetrisClass.Speed!=1)
+									Tetris.TetrisClass.Speed--;
+							}
+							if(selected==4){
+								end=true;
+								isEnter=1;
+							}
+							break;
+						case ConsoleKey.DownArrow:
+							if(selected!=4)
+								selected++;
+							break;
+						case ConsoleKey.UpArrow:
+							if(selected!=1)
+								selected--;
 							break;
 						default:
 							break;
 					}
 				}
-				Console.SetCursorPosition((Console.WindowWidth -msg1.Length) / 2,Console.WindowHeight / 2-1);
-				Console.Write(msg1);
-				Console.SetCursorPosition((Console.WindowWidth -msg2.Length) / 2,(Console.WindowHeight / 2 +1));
-				Console.Write(msg2);
+				isEnter=0;
 				Console.Clear();
 			}
 			Console.CursorVisible = true;
