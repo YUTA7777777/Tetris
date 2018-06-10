@@ -1022,24 +1022,42 @@ namespace Main
 			Console.Clear();
 			gameMain = new 	Tetris.TetrisClass();
 			bool end=false;
+			int selected=0;
+			string msg1="Quit";
+			string msg2="Change LEVEL";
 			while (!end)
 			{
 				gameMain.Run();
-				string msg1="If you want to quit this game ,please press ESC.";
-				Console.SetCursorPosition((Console.WindowWidth -msg1.Length) / 2,Console.WindowHeight / 2);
-				Console.Write(msg1);
-				ConsoleKeyInfo key = Console.ReadKey(true); 
-				switch(key.Key)
+				while(!end)
 				{
-					case ConsoleKey.Escape:
-						end=true;
-						break;
-					default:
-						Tetris.TetrisClass.isGameExit=false;
-						Tetris.TetrisClass.Score=0;
-						Tetris.TetrisClass.Lines=0;
-						break;
+					Console.SetCursorPosition((Console.WindowWidth -msg1.Length) / 2,Console.WindowHeight / 2-1);
+					Console.Write(msg1);
+					Console.SetCursorPosition((Console.WindowWidth -msg2.Length) / 2,(Console.WindowHeight / 2 +1));
+					Console.Write(msg2);
+					ConsoleKeyInfo key = Console.ReadKey(true); 
+					switch(key.Key)
+					{
+						case ConsoleKey.Enter:
+							if(selected==1)
+								end=true;
+							if(selected==2)
+								Tetris.TetrisClass.Speed++;
+							if(selected==3){
+								Tetris.TetrisClass.isGameExit=false;
+								Tetris.TetrisClass.Score=0;
+								Tetris.TetrisClass.Lines=0;
+							}
+						case ConsoleKey.Escape:
+							end=true;
+							break;
+						default:
+							break;
+					}
 				}
+				Console.SetCursorPosition((Console.WindowWidth -msg1.Length) / 2,Console.WindowHeight / 2-1);
+				Console.Write(msg1);
+				Console.SetCursorPosition((Console.WindowWidth -msg2.Length) / 2,(Console.WindowHeight / 2 +1));
+				Console.Write(msg2);
 				Console.Clear();
 			}
 			Console.CursorVisible = true;
