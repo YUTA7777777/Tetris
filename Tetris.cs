@@ -1024,6 +1024,7 @@ namespace Main
 		public static Tetris.TetrisClass gameMain;
 		static void Main(string[] args)
 		{
+			Console.Title="";
 			Console.Clear();
 			gameMain = new 	Tetris.TetrisClass();
 			bool end=false;
