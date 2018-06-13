@@ -1090,7 +1090,7 @@ namespace Main
 								gameMain.Run();
 							}
 							if(selected==2){
-								if(Tetris.TetrisClass.Speed!=10)
+								if(Tetris.TetrisClass.Speed!=9)
 									Tetris.TetrisClass.Speed++;
 							}
 							if(selected==3){
