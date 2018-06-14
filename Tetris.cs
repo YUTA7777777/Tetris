@@ -240,12 +240,12 @@ namespace Tetris
 			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+3, 2);
 			Console.Write("Score");
 			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+3, 5);
-			Console.Write("Lines");
+			Console.Write("Level");
 
 			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+2, 3);
 			Console.Write(String.Format("{0:D8}", Score));
 			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+2, 6);
-			Console.Write(String.Format("{0:D8}", Lines));
+			Console.Write(String.Format("{0:D8}", Speed));
 			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+3, 17);
 			Console.Write("Pause : Enter or P");
 			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+3, 20);
