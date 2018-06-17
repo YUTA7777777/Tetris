@@ -316,10 +316,14 @@ namespace Tetris
 			else
 				if(isRows)
 				{
+					//Fill the row
+					Console.Beep(900,800);
 					isRows = false;
 				}
 				else
 				{
+					//Put the Block
+					Console.Beep(900,200);
 
 				}
 		}
