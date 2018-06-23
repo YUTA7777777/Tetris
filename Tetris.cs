@@ -317,7 +317,7 @@ namespace Tetris
 				if(isRows)
 				{
 					//Fill the row
-					Console.Beep(900,800);
+					Console.Beep(1000,800);
 					isRows = false;
 				}
 				else
