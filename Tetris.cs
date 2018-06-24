@@ -95,7 +95,7 @@ namespace Tetris
 						case ConsoleKey.P:
 						case ConsoleKey.Enter: // pause, resume
 							// PRESS ANY KEY TO CONTINUE.
-							Console.ForegroundColor = ConsoleColor.Cyan;
+							Console.ForegroundColor = ConsoleColor.White;
 							Console.SetCursorPosition((Console.WindowWidth - msg3.Length) / 2,
 									PlayWindow.height+PlayWindow.top+2);
 							Console.Write(msg3);
@@ -163,9 +163,8 @@ namespace Tetris
 								// can't rotate, restore old angle.
 								Tetris.Block.Rotate(saveAngle);
 							break;
-						case ConsoleKey.Q:
-						case ConsoleKey.Escape:
-							isGameExit = true;
+						case ConsoleKey.M:
+							isGameExit=true;
 							break;
 					}
 
@@ -248,12 +247,11 @@ namespace Tetris
 			Console.Write(String.Format("{0:D8}", Speed));
 			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+3, 17);
 			Console.Write("Pause : Enter or P");
-			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+3, 20);
-			Console.Write("Quit  : ESC or Q");
+			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+3, 19);
+			Console.Write("MENU :  M");
 
 			if(Score>=500)
 			{
-				// CONGRATULATIONS!!!
 				Console.ForegroundColor = ConsoleColor.White;
 				Console.SetCursorPosition((Console.WindowWidth - msg1.Length) / 2,
 						Console.WindowHeight/2);
@@ -316,14 +314,12 @@ namespace Tetris
 			else
 				if(isRows)
 				{
-					//Fill the row
-					Console.Beep(1000,800);
 					isRows = false;
+					Console.Beep(800,800);
 				}
 				else
 				{
-					//Put the Block
-					Console.Beep(900,200);
+					Console.Beep();
 
 				}
 		}
@@ -1034,7 +1030,7 @@ namespace Main
 			bool end=false;
 			int selected=1;
 			int isEnter=0;
-			string msg1="Start the Game";
+			string msg1="Start";
 			string msg2="Level up!!";
 			string msg3="Level down!!";
 			string msg4="Quit";
