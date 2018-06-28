@@ -66,6 +66,16 @@ namespace Tetris
 			Stopwatch stopWatch = new Stopwatch();
 
 			GameDesign();
+			// PRESS ANY KEY TO START.
+			Console.ForegroundColor = ConsoleColor.White;
+			Console.SetCursorPosition((Console.WindowWidth - msg2.Length) / 2,
+					PlayWindow.height+PlayWindow.top+2);
+			Console.Write(msg2);
+			Console.ResetColor();
+			Console.ReadKey();
+
+			// clear the message from the bottom window
+			ClearBottomLine();
 
 			Tetris = new Game.TetrisClass(PlayWindow);
 			// Hook up the ProcessEvent.
@@ -96,14 +106,34 @@ namespace Tetris
 						case ConsoleKey.Enter: // pause, resume
 							// PRESS ANY KEY TO CONTINUE.
 							Console.ForegroundColor = ConsoleColor.White;
-							Console.SetCursorPosition((Console.WindowWidth - msg3.Length) / 2,
-									PlayWindow.height+PlayWindow.top+2);
+							Console.SetCursorPosition((Console.WindowWidth - msg3.Length) / 2 -6,
+									PlayWindow.height+PlayWindow.top/2-2);
 							Console.Write(msg3);
 							Console.ForegroundColor = ConsoleColor.White;
 							Console.ResetColor();
 							Console.ReadKey();
 							// clear the message from the bottom window.
+							Console.Clear();
 							ClearBottomLine();
+							ShowStatus();
+							GameDesign();
+							Console.ForegroundColor = ConsoleColor.White;
+							Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+4, 8);
+							Console.Write("Next");
+							Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+2, 9);
+							Console.Write("+------+");
+
+							for(int i=1; i<=6; i++)
+							{
+								Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+2, i+9);
+								Console.Write("|      |");
+							}
+
+							Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+2, 15);
+							Console.Write("+------+");
+							Console.ResetColor();
+
+							Tetris.Block.Preview(new Point(PlayWindow.width+PlayWindow.left+6, 12), nextBlock);
 							break;
 						case ConsoleKey.LeftArrow: // move left
 							// Could go left?
@@ -353,16 +383,6 @@ namespace Tetris
 			}
 
 
-			// PRESS ANY KEY TO START.
-			Console.ForegroundColor = ConsoleColor.White;
-			Console.SetCursorPosition((Console.WindowWidth - msg2.Length) / 2,
-					PlayWindow.height+PlayWindow.top+2);
-			Console.Write(msg2);
-			Console.ResetColor();
-			Console.ReadKey();
-
-			// clear the message from the bottom window
-			ClearBottomLine();
 		}
 
 		private static void ClearBottomLine()
@@ -1047,7 +1067,7 @@ namespace Main
 					for(int i=1; i<=12; i++)
 					{
 						Console.SetCursorPosition((Console.WindowWidth-17)/2, Console.WindowHeight / 2+i-6);
-					Console.Write("|                |");
+						Console.Write("|                |");
 					}
 
 					Console.SetCursorPosition((Console.WindowWidth-17)/2, Console.WindowHeight / 2+6);
