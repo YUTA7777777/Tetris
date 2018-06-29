@@ -1054,11 +1054,27 @@ namespace Main
 			bool end=false;
 			int selected=1;
 			int isEnter=0;
+			string startmsg="Press any key to start...";
 			string msg1="Start";
 			string msg2="Level up!!";
 			string msg3="Level down!!";
 			string msg4="Quit";
 			Console.CursorVisible = false;
+							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -2 ));
+			Console.Write("---+--- +---- ---+--- +---Å_ -+- Å^--Å_");
+							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -1 ));
+			Console.Write("   |    |        |    |    |  |  |");
+							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2  ));
+			Console.Write("   |    +----    |    +---Å^  |  Å_--Å_");
+							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 +1 ));
+			Console.Write("   |    |        |    |Å_     |       |");
+							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 +2 ));
+			Console.Write("   |    +----    |    |  Å_  -+- Å_--Å^");
+			Console.SetCursorPosition((Console.WindowWidth - startmsg.Length) / 2,
+					Console.WindowHeight-2);
+			Console.Write(startmsg);
+			Console.ReadKey();
+			Console.Clear();
 			while (!end)
 			{
 				while(isEnter==0)
