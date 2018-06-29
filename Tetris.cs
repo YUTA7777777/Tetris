@@ -42,7 +42,6 @@ namespace Tetris
 
 		const string msg1 = " Good job!! ";
 		const string msg2 = " Press Key to start..";
-		const string msg3 = "Pause";
 
 		public static int Speed = 1; // Speed of the game.
 		public static int Score = 0; // Total score.
@@ -105,16 +104,21 @@ namespace Tetris
 						case ConsoleKey.P:
 						case ConsoleKey.Enter: // pause, resume
 							// PRESS ANY KEY TO CONTINUE.
-							Console.ForegroundColor = ConsoleColor.White;
-							Console.SetCursorPosition((Console.WindowWidth - msg3.Length) / 2 -6,
-									PlayWindow.height+PlayWindow.top/2-2);
-							Console.Write(msg3);
-							Console.ForegroundColor = ConsoleColor.White;
+							Console.ForegroundColor = ConsoleColor.Magenta;
+							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -2 ));
+							Console.Write("+---Å_  +---+  |     |  Å^--Å_  +----");
+							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -1 ));
+							Console.Write("|    |  |   |  |     |  |       |");
+							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -0 ));
+							Console.Write("+---Å^  +---+  |     |  Å_--Å_  +----");
+							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 +1 ));
+							Console.Write("|       |   |  |     |       |  |");
+							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 +2 ));
+							Console.Write("|       |   |   Å__Å^   Å_--Å^  +----");
 							Console.ResetColor();
 							Console.ReadKey();
 							// clear the message from the bottom window.
 							Console.Clear();
-							ClearBottomLine();
 							ShowStatus();
 							GameDesign();
 							Console.ForegroundColor = ConsoleColor.White;
