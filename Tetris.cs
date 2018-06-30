@@ -102,10 +102,6 @@ namespace Tetris
 
 					switch(kb.Key)
 					{
-						case ConsoleKey.A:
-							Score=499;
-							ShowStatus();
-							break;
 						case ConsoleKey.P:
 						case ConsoleKey.Enter: // pause, resume
 							// PRESS ANY KEY TO CONTINUE.
