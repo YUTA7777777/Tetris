@@ -850,13 +850,13 @@ namespace Game
 			if(!Location.x.Equals(pt.x) || !Location.y.Equals(pt.y) || isRotateUpdate)
 			{
 				TetrisClass.DrawField(pt, wrBlockAdj);
-				Console.ForegroundColor = Color(Type);
+				Console.BackgroundColor = Color(Type);
 				for(int row=wrBlockAdj.top; row<wrBlockAdj.top+wrBlockAdj.height; row++)
 					for(int col=wrBlockAdj.left; col<wrBlockAdj.left+wrBlockAdj.width; col++)
 						if(arrBlock[col+row*BLOCK_SIZE])  
 						{
 							Console.SetCursorPosition(pt.x+col-wrBlockAdj.left, pt.y+row-wrBlockAdj.top);
-							Console.Write("#");
+							Console.Write(" ");//Draw the Playing Block
 						}
 				Console.ResetColor();
 
@@ -874,14 +874,14 @@ namespace Game
 			// so we can able to draw the block in correct position.
 			Adjustment(ref wrBlockAdj, arrData);
 
-			Console.ForegroundColor = Color(structBlock.type);
+			Console.BackgroundColor = Color(structBlock.type);
 			for(int row=wrBlockAdj.top; row<wrBlockAdj.top+wrBlockAdj.height; row++)
 				for(int col=wrBlockAdj.left; col<wrBlockAdj.left+wrBlockAdj.width; col++)
 					if(arrData[col+row*BLOCK_SIZE])  
 					{
 						Console.SetCursorPosition(pt.x+col-wrBlockAdj.left-wrBlockAdj.width/2, 
 								pt.y+row-wrBlockAdj.top-wrBlockAdj.height/2);
-						Console.Write("#");
+						Console.Write(" ");//Draw the Next Block
 					}
 			Console.ResetColor();
 		}
@@ -951,9 +951,10 @@ namespace Game
 				{
 					if(((StructBlockStyle)arrField[col+row*w]).isBlock)
 					{
-						Console.ForegroundColor = ((StructBlockStyle)arrField[col+row*w]).color;
+						Console.BackgroundColor = ((StructBlockStyle)arrField[col+row*w]).color;
 						Console.SetCursorPosition(TetrisField.left+col, TetrisField.top+row);
-						Console.Write("#");
+						Console.Write(" ");//Draw the Block that put
+						Console.ResetColor();
 					}
 					else
 					{
