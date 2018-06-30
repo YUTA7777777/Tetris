@@ -46,6 +46,7 @@ namespace Tetris
 		public static int Speed = 1; // Speed of the game.
 		public static int Score = 0; // Total score.
 		public static int Lines = 0; // Total lines completed.
+		public static bool Cheer = false; //Have I ever Cheered?
 
 		static Point ptBlock         = new Point();      // The x and y positions of the block.
 		static WindowRect wrBlockAdj = new WindowRect(); // Block adjustment.
@@ -102,7 +103,7 @@ namespace Tetris
 					switch(kb.Key)
 					{
 						case ConsoleKey.A:
-							Score=500;
+							Score=499;
 							ShowStatus();
 							break;
 						case ConsoleKey.P:
@@ -269,14 +270,28 @@ namespace Tetris
 			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+3, 19);
 			Console.Write("MENU :  M");
 
-			if(Score>=500)
+			if(!Cheer)
 			{
-				Console.ForegroundColor = ConsoleColor.White;
-				Console.SetCursorPosition((Console.WindowWidth - msg1.Length) / 2,
-						Console.WindowHeight/2);
-				Console.Write(msg1);
-				Console.ReadKey();
-				Console.ResetColor();
+				if(Score>=500)
+				{
+					Console.Clear();
+					Console.ForegroundColor = ConsoleColor.Magenta;
+					Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -2 ));
+					Console.Write("Å^--Å_  Å^--Å_  Å^--Å_  +---Å_  ||");
+					Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -1 ));
+					Console.Write("|       |    |  |    |  |    |  ||");
+					Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -0 ));
+					Console.Write("|       |    |  |    |  |    |  ||");
+					Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 +1 ));
+					Console.Write("|   -+  |    |  |    |  |    |  ");
+					Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 +2 ));
+					Console.Write("Å_-Å^|  Å_--Å^  Å_--Å^  +---Å^  []");
+					Console.ResetColor();
+					Console.ReadKey();
+					Cheer=true;
+					Restart();
+				}
+
 			}
 		}
 
@@ -1133,6 +1148,7 @@ namespace Main
 								Tetris.TetrisClass.isGameExit=false;
 								Tetris.TetrisClass.Score=0;
 								Tetris.TetrisClass.Lines=0;
+								Tetris.TetrisClass.Cheer=false;
 								isEnter=1;
 								Console.Clear();
 								gameMain.Run();
