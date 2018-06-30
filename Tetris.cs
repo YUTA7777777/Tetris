@@ -101,6 +101,10 @@ namespace Tetris
 
 					switch(kb.Key)
 					{
+						case ConsoleKey.A:
+							Score=500;
+							ShowStatus();
+							break;
 						case ConsoleKey.P:
 						case ConsoleKey.Enter: // pause, resume
 							// PRESS ANY KEY TO CONTINUE.
@@ -118,26 +122,7 @@ namespace Tetris
 							Console.ResetColor();
 							Console.ReadKey();
 							// clear the message from the bottom window.
-							Console.Clear();
-							ShowStatus();
-							GameDesign();
-							Console.ForegroundColor = ConsoleColor.White;
-							Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+4, 8);
-							Console.Write("Next");
-							Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+2, 9);
-							Console.Write("+------+");
-
-							for(int i=1; i<=6; i++)
-							{
-								Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+2, i+9);
-								Console.Write("|      |");
-							}
-
-							Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+2, 15);
-							Console.Write("+------+");
-							Console.ResetColor();
-
-							Tetris.Block.Preview(new Point(PlayWindow.width+PlayWindow.left+6, 12), nextBlock);
+							Restart();
 							break;
 						case ConsoleKey.LeftArrow: // move left
 							// Could go left?
@@ -247,21 +232,21 @@ namespace Tetris
 
 				// Increase the speed according to the number of lines completed.
 				if((Score>=10) && (Score<=25))
-					Speed = 2;
+					Speed++;
 				else if((Lines>=25) && (Score<=50))
-					Speed = 3;
+					Speed++;
 				else if((Score>=50) && (Score<=75))
-					Speed = 4;
+					Speed++;
 				else if((Score>=75) && (Score<=100))
-					Speed = 5;
+					Speed++;
 				else if((Score>=100) && (Score<=150))
-					Speed = 6;
+					Speed++;
 				else if((Score>=150) && (Score<=250))
-					Speed = 7;
+					Speed++;
 				else if((Score>=250) && (Score<=500))
-					Speed = 8;
+					Speed++;
 				else if(Score>=500)
-					Speed = 9;
+					Speed++;
 
 				ShowStatus();   
 			}
@@ -292,7 +277,6 @@ namespace Tetris
 				Console.Write(msg1);
 				Console.ReadKey();
 				Console.ResetColor();
-				isGameExit = true;
 			}
 		}
 
@@ -396,6 +380,29 @@ namespace Tetris
 				Console.SetCursorPosition(i, PlayWindow.height+PlayWindow.top+2);
 				Console.Write(" ");
 			}
+		}
+		private static void Restart()
+		{
+			Console.Clear();
+			ShowStatus();
+			GameDesign();
+			Console.ForegroundColor = ConsoleColor.White;
+			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+4, 8);
+			Console.Write("Next");
+			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+2, 9);
+			Console.Write("+------+");
+
+			for(int i=1; i<=6; i++)
+			{
+				Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+2, i+9);
+				Console.Write("|      |");
+			}
+
+			Console.SetCursorPosition(PlayWindow.width+PlayWindow.left+2, 15);
+			Console.Write("+------+");
+			Console.ResetColor();
+
+			Tetris.Block.Preview(new Point(PlayWindow.width+PlayWindow.left+6, 12), nextBlock);
 		}
 	}
 }
@@ -1060,15 +1067,15 @@ namespace Main
 			string msg3="Level down!!";
 			string msg4="Quit";
 			Console.CursorVisible = false;
-							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -2 ));
+			Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -2 ));
 			Console.Write("---+--- +---- ---+--- +---_ -+- ^--_");
-							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -1 ));
+			Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -1 ));
 			Console.Write("   |    |        |    |    |  |  |");
-							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2  ));
+			Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2  ));
 			Console.Write("   |    +----    |    +---^  |  _--_");
-							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 +1 ));
+			Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 +1 ));
 			Console.Write("   |    |        |    |_     |       |");
-							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 +2 ));
+			Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 +2 ));
 			Console.Write("   |    +----    |    |  _  -+- _--^");
 			Console.SetCursorPosition((Console.WindowWidth - startmsg.Length) / 2,
 					Console.WindowHeight-2);
