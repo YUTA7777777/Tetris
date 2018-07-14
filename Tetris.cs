@@ -1099,7 +1099,7 @@ namespace Main
 				while(isEnter==0)
 				{
 					Console.CursorVisible = false;
-					Console.ForegroundColor = ConsoleColor.White;
+					Console.BackgroundColor= ConsoleColor.Black;
 					Console.SetCursorPosition((Console.WindowWidth-17)/2, Console.WindowHeight / 2-6);
 					Console.Write("+----------------+");
 
@@ -1115,24 +1115,37 @@ namespace Main
 
 					Console.SetCursorPosition((Console.WindowWidth -msg1.Length) / 2,Console.WindowHeight / 2-4);
 					if(selected==1)
-						Console.ForegroundColor = ConsoleColor.Blue;
+					{
+						Console.BackgroundColor = ConsoleColor.White;
+						Console.ForegroundColor = ConsoleColor.Black;
+					}
 					Console.Write(msg1);
-					Console.ForegroundColor = ConsoleColor.White;
+					Console.ResetColor();
 					Console.SetCursorPosition((Console.WindowWidth -msg2.Length) / 2,(Console.WindowHeight / 2 -2));
 					if(selected==2)
-						Console.ForegroundColor = ConsoleColor.Blue;
+					{
+						Console.BackgroundColor = ConsoleColor.White;
+						Console.ForegroundColor = ConsoleColor.Black;
+					}
 					Console.Write(msg2);
+					Console.ResetColor();
 					Console.ForegroundColor = ConsoleColor.White;
 					Console.SetCursorPosition((Console.WindowWidth -msg3.Length) / 2,(Console.WindowHeight / 2  ));
 					if(selected==3)
-						Console.ForegroundColor = ConsoleColor.Blue;
+					{
+						Console.BackgroundColor = ConsoleColor.White;
+						Console.ForegroundColor = ConsoleColor.Black;
+					}
 					Console.Write(msg3);
-					Console.ForegroundColor = ConsoleColor.White;
+					Console.ResetColor();
 					Console.SetCursorPosition((Console.WindowWidth -msg4.Length) / 2,(Console.WindowHeight / 2 +2));
 					if(selected==4)
-						Console.ForegroundColor = ConsoleColor.Blue;
+					{
+						Console.BackgroundColor = ConsoleColor.White;
+						Console.ForegroundColor = ConsoleColor.Black;
+					}
 					Console.Write(msg4);
-					Console.ForegroundColor = ConsoleColor.White;
+					Console.ResetColor();
 					Console.SetCursorPosition((Console.WindowWidth) / 2 -4,(Console.WindowHeight / 2 +4));
 					Console.Write("LEVEL       ");
 					Console.SetCursorPosition((Console.WindowWidth) / 2 +3,(Console.WindowHeight / 2 +4));
@@ -1176,8 +1189,9 @@ namespace Main
 					}
 				}
 				isEnter=0;
-				Console.Clear();
 			}
+			Console.ResetColor();
+			Console.Clear();
 			Console.CursorVisible = true;
 		}
 	}
