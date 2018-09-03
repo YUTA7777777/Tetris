@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
+using System.Xml.Serialization;
 
 
 struct WindowRect
@@ -36,7 +35,7 @@ struct Point
 namespace Tetris
 {
 	public class TetrisClass
-	{        
+	{
 		const int    MAX_SPEED     = 9;
 		const double DEFAULT_SPEED = 0.9; // 0.9 seconds
 
@@ -53,6 +52,7 @@ namespace Tetris
 		static WindowRect PlayWindow = new WindowRect(); // The size of the field.    
 		static bool isRows           = false;            // Is full row?
 		public static bool isGameExit       = false;            // Terminate the game.
+		public static bool isClear       = true;            // Terminate the game.
 
 		static Game.StructBlock nextBlock = new Game.StructBlock();
 		static Game.StructBlock currBlock = new Game.StructBlock();
@@ -107,15 +107,15 @@ namespace Tetris
 							// PRESS ANY KEY TO CONTINUE.
 							Console.ForegroundColor = ConsoleColor.Magenta;
 							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -2 ));
-							Console.Write("+---Å_  +---+  |     |  Å^--Å_  +----");
+							Console.Write("+---Å_  +---+  |    |  Å^--Å_  +----");
 							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -1 ));
-							Console.Write("|    |  |   |  |     |  |       |");
+							Console.Write("|    |  |   |  |    |  |       |");
 							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -0 ));
-							Console.Write("+---Å^  +---+  |     |  Å_--Å_  +----");
+							Console.Write("+---Å^  +---+  |    |  Å_--Å_  +----");
 							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 +1 ));
-							Console.Write("|       |   |  |     |       |  |");
+							Console.Write("|       |   |  |    |       |  |");
 							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 +2 ));
-							Console.Write("|       |   |   Å__Å^   Å_--Å^  +----");
+							Console.Write("|       |   |  Å___Å^  Å_--Å^  +----");
 							Console.ResetColor();
 							Console.ReadKey();
 							// clear the message from the bottom window.
@@ -181,6 +181,7 @@ namespace Tetris
 							break;
 						case ConsoleKey.M:
 							isGameExit=true;
+							isClear=false;
 							break;
 					}
 
@@ -224,7 +225,7 @@ namespace Tetris
 			if(e.RowsCompleted>0)
 			{
 				isRows = true;
-				Score += e.RowsCompleted*(e.RowsCompleted>1?15:10);
+				Score += e.RowsCompleted*(e.RowsCompleted>1?15:10)*Speed;
 				Lines += e.RowsCompleted;
 
 				// Increase the speed according to the number of lines completed.
@@ -1061,6 +1062,15 @@ namespace Game
 }
 namespace Main
 {
+	public class Data : System.IComparable
+	{
+		public int data{get;set;}
+		public string name{get;set;}
+		public int CompareTo(object obj)
+		{
+			return this.data.CompareTo(((Data)obj).data);
+		}
+	}
 	public class MainClass
 	{
 
@@ -1073,6 +1083,23 @@ namespace Main
 			bool end=false;
 			int selected=1;
 			int isEnter=0;
+			string PlayerName="";
+			Data[] Data=new Data[0];
+			try{
+				var dexmlSerializer = new XmlSerializer(typeof(Data[]));
+				var xmlSettings = new System.Xml.XmlReaderSettings()
+				{
+					CheckCharacters = false,
+				};
+				using (var streamReader = new StreamReader("Data", Encoding.UTF8))
+					using (var xmlReader
+							= System.Xml.XmlReader.Create(streamReader, xmlSettings))
+					{
+						Data = (Data[])dexmlSerializer.Deserialize(xmlReader);
+					}
+			}catch{
+				Data=new Data[0];
+			}
 			string startmsg="Press any key to start...";
 			string msg1="Start";
 			string msg2="Level up!!";
@@ -1093,6 +1120,12 @@ namespace Main
 					Console.WindowHeight-2);
 			Console.Write(startmsg);
 			Console.ReadKey();
+			Console.Clear();
+			Console.CursorVisible = true;
+			Console.SetCursorPosition(0,Console.WindowHeight-3);
+			Console.Write("Please write your name\n\n");
+			PlayerName=Console.ReadLine();
+			Console.CursorVisible = false;
 			Console.Clear();
 			while (!end)
 			{
@@ -1159,9 +1192,38 @@ namespace Main
 								Tetris.TetrisClass.Score=0;
 								Tetris.TetrisClass.Lines=0;
 								Tetris.TetrisClass.Cheer=false;
+								Tetris.TetrisClass.isClear=true;
 								isEnter=1;
 								Console.Clear();
 								gameMain.Run();
+								if(Tetris.TetrisClass.isClear)
+								{
+									int tmplength = Data.Length;
+									Array.Resize(ref Data,Data.Length+1);
+									Data[tmplength]=new Data();
+									Data[tmplength].data=Tetris.TetrisClass.Score;
+									Data[tmplength].name=PlayerName;
+									Array.Sort(Data);
+									Array.Reverse(Data);
+									Console.Clear();
+									using (var streamWriter = new StreamWriter("Data", false, Encoding.UTF8))
+									{
+										var xmlSerializer1 = new XmlSerializer(typeof(Data[]));
+										xmlSerializer1.Serialize(streamWriter, Data);
+									}
+								}
+								Console.SetCursorPosition(Console.WindowWidth/2+10,Console.WindowHeight/2-8);
+								Console.Write("åªç›ÇÃÉXÉRÉA : {0}",Tetris.TetrisClass.Score);
+								for(int i=0;i<Data.Length;i++)
+								{
+									if(0<=i && i<= Data.Length-1)
+									{
+										Console.SetCursorPosition(Console.WindowWidth/2+10,Console.WindowHeight/2-5+2*i);
+										Console.Write("{0}à : {1} point ({2})",i+1,Data[i].data,Data[i].name);
+									}
+									if(i>5)
+										break;
+								}
 							}
 							if(selected==2){
 								if(Tetris.TetrisClass.Speed!=9)
