@@ -107,15 +107,15 @@ namespace Tetris
 							// PRESS ANY KEY TO CONTINUE.
 							Console.ForegroundColor = ConsoleColor.Magenta;
 							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -2 ));
-							Console.Write("+---Å_  +---+  |    |  Å^--Å_  +----");
+							Console.Write("+---Ôºº  +---+  |    |  Ôºè--Ôºº  +----");
 							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -1 ));
 							Console.Write("|    |  |   |  |    |  |       |");
 							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -0 ));
-							Console.Write("+---Å^  +---+  |    |  Å_--Å_  +----");
+							Console.Write("+---Ôºè  +---+  |    |  Ôºº--Ôºº  +----");
 							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 +1 ));
 							Console.Write("|       |   |  |    |       |  |");
 							Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 +2 ));
-							Console.Write("|       |   |  Å___Å^  Å_--Å^  +----");
+							Console.Write("|       |   |  Ôºº__Ôºè  Ôºº--Ôºè  +----");
 							Console.ResetColor();
 							Console.ReadKey();
 							// clear the message from the bottom window.
@@ -274,7 +274,7 @@ namespace Tetris
 					Console.Clear();
 					Console.ForegroundColor = ConsoleColor.Magenta;
 					Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -2 ));
-					Console.Write("Å^--Å_  Å^--Å_  Å^--Å_  +---Å_  ||");
+					Console.Write("Ôºè--Ôºº  Ôºè--Ôºº  Ôºè--Ôºº  +---Ôºº  ||");
 					Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -1 ));
 					Console.Write("|       |    |  |    |  |    |  ||");
 					Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -0 ));
@@ -282,7 +282,7 @@ namespace Tetris
 					Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 +1 ));
 					Console.Write("|   -+  |    |  |    |  |    |  ");
 					Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 +2 ));
-					Console.Write("Å_-Å^|  Å_--Å^  Å_--Å^  +---Å^  []");
+					Console.Write("Ôºº-Ôºè|  Ôºº--Ôºè  Ôºº--Ôºè  +---Ôºè  []");
 					Console.ResetColor();
 					Console.ReadKey();
 					Cheer=true;
@@ -1107,15 +1107,15 @@ namespace Main
 			string msg4="Quit";
 			Console.CursorVisible = false;
 			Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -2 ));
-			Console.Write("---+--- +---- ---+--- +---Å_ -+- Å^--Å_");
+			Console.Write("---+--- +---- ---+--- +---Ôºº -+- Ôºè--Ôºº");
 			Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 -1 ));
 			Console.Write("   |    |        |    |    |  |  |");
 			Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2  ));
-			Console.Write("   |    +----    |    +---Å^  |  Å_--Å_");
+			Console.Write("   |    +----    |    +---Ôºè  |  Ôºº--Ôºº");
 			Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 +1 ));
-			Console.Write("   |    |        |    |Å_     |       |");
+			Console.Write("   |    |        |    |Ôºº     |       |");
 			Console.SetCursorPosition((Console.WindowWidth ) / 2 - 17,(Console.WindowHeight / 2 +2 ));
-			Console.Write("   |    +----    |    |  Å_  -+- Å_--Å^");
+			Console.Write("   |    +----    |    |  Ôºº  -+- Ôºº--Ôºè");
 			Console.SetCursorPosition((Console.WindowWidth - startmsg.Length) / 2,
 					Console.WindowHeight-2);
 			Console.Write(startmsg);
@@ -1213,13 +1213,13 @@ namespace Main
 									}
 								}
 								Console.SetCursorPosition(Console.WindowWidth/2+10,Console.WindowHeight/2-8);
-								Console.Write("åªç›ÇÃÉXÉRÉA : {0}",Tetris.TetrisClass.Score);
+								Console.Write("ÁèæÂú®„ÅÆ„Çπ„Ç≥„Ç¢ : {0}",Tetris.TetrisClass.Score);
 								for(int i=0;i<Data.Length;i++)
 								{
 									if(0<=i && i<= Data.Length-1)
 									{
 										Console.SetCursorPosition(Console.WindowWidth/2+10,Console.WindowHeight/2-5+2*i);
-										Console.Write("{0}à : {1} point ({2})",i+1,Data[i].data,Data[i].name);
+										Console.Write("{0}‰Ωç: {1} point ({2})",i+1,Data[i].data,Data[i].name);
 									}
 									if(i>5)
 										break;
